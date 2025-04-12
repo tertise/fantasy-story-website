@@ -39,6 +39,7 @@ import { useRouter } from 'next/router'
 import { bootstrap } from 'lib/bootstrap-client'
 import { fathomId, fathomConfig } from 'lib/config'
 import * as Fathom from 'fathom-client'
+import Head from 'next/head' // ✅ 필수 추가
 
 if (typeof window !== 'undefined') {
   bootstrap()
@@ -63,5 +64,17 @@ export default function App({ Component, pageProps }) {
     }
   }, [])
 
-  return <Component {...pageProps} />
+  return (
+    <>
+      {/* ✅ Pretendard 폰트 CDN */}
+      <Head>
+        <link
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
+          rel="stylesheet"
+        />
+      </Head>
+      
+      <Component {...pageProps} />
+    </>
+  )
 }
